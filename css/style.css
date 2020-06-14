@@ -1,0 +1,57 @@
+
+/*cum as vrea sa arate meniu home
+#top-menu-bar {
+  text-align: center;
+  background-color:#334455;
+  color:#fff;
+}
+#top-menu-bar li {
+  display:inline; margin:0;
+  padding:0;
+}
+#top-menu-bar a {
+  text-decoration: none;
+  padding: 0 15px 0 15px;
+  color: #fff;
+}
+#top-menu-bar a:visited {color: #fff;}
+#top-menu-bar a:hover {
+  color: #334455; background: #fff;
+}
+*/
+
+/* http://www.w3schools.com/css/tryit.asp?filename=trycss_table_color */
+#search {
+  padding: 4px;
+  width: 300px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+th {
+  background-color: #00aeef;
+  color: white;
+}
+.add-form {
+  padding: 10px 0;
+}
+.add-form a {
+  text-decoration: none;
+}
+.add-form a:hover {
+  text-decoration: underline;
+}
+.add-form td input {
+  width: 100%;
+  padding: 4px;
+}
+.add-form button {
+  padding: 2px 4px;
+  min-width: 30px;
+}
