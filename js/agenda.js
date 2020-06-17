@@ -6,11 +6,13 @@ API_URL: 'http://localhost:8081/agenda',
   let firstNameValue = $('#firstName').val();
   let lastNameValue = $('#lastName').val();
   let phoneNumberValue = $('#phoneNumber').val();
+  let emailValue = $('#email').val();
 
   var requestBody = {
     firstName: firstNameValue,
     lastName: lastNameValue,
     phoneNumber: phoneNumberValue,
+    email:emailValue,
   };
         $.ajax (
           {
@@ -24,9 +26,10 @@ API_URL: 'http://localhost:8081/agenda',
         })
   },
 
-  bindEvents: function (){
-  $('#add-form').submit(function () {
-    PhoneBook.createAgenda()
+  bindEvents: function () {
+  $('.add-form').submit(function (event) {
+    event.preventDefault();
+    PhoneBook.createAgenda();
   });
 }
 
