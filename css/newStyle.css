@@ -1,0 +1,143 @@
+
+body {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.8em;
+  margin: 10px 0 5px 0;
+}
+
+header {
+  padding: 2px;
+  min-height: 30px;
+  text-align: center;
+  font-size: large;
+  height: 100px;
+  width: 100%;
+  float: left;
+  font-family: Helvetica, sans-serif;
+  background-color: rgba(194, 194, 194, 0.68);
+}
+
+a {
+  color: #00B7FF;
+}
+
+#logo {
+  text-decoration: none;
+  float: right;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  text-align: -webkit-right;
+  color: #55aade;
+  padding: 50px 10px 10px 10px;
+  margin-right: 10px;
+}
+
+#navigation-menu {
+  overflow: hidden;
+  background-color:  #55aade;
+}
+
+#navigation-menu a {
+  float: right;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+#navigation-menu a:hover {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+#navigation-menu div {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  background-color: #00aeef;
+  border-bottom: 1px solid #00aeef;
+  height: 40px;
+  font-weight: bold;
+}
+
+#content-wrapper {
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 35px;
+}
+/*#secondary-toggle {*/
+/*  display: flex;*/
+/*}*/
+
+/*#breadcrumb {*/
+/*  background: #dcdcdc url("../img/house.png") 3px center no-repeat;*/
+/*  padding: 10px 5px 10px 40px;*/
+/*  border: 1px solid #00aeef;*/
+/*  border-radius: 3px;*/
+/*  box-shadow: 1px 1px 3px #c2c2c2;*/
+/*  color: #245674;*/
+/*}*/
+
+.clear {
+  clear: both;
+}
+
+footer {
+  text-align: left;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  background-color: #55aade;
+  color: #ffffff;
+  font-size: 0.9em;
+  padding: 2px;
+  height: 30px;
+}
+
+#content {
+  padding-left: 220px;
+  float: left;
+  width: 70%;
+}
+
+#search {
+  padding: 4px;
+  width: 300px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+th {
+  background-color: #55aade;
+  color: white;
+}
+.add-form {
+  padding: 10px 0;
+}
+.add-form a {
+  text-decoration: none;
+}
+.add-form a:hover {
+  text-decoration: underline;
+}
+.add-form td input {
+  width: 100%;
+  padding: 4px;
+}
+.add-form button {
+  padding: 2px 4px;
+  min-width: 30px;
+}
