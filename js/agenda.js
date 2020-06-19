@@ -59,12 +59,56 @@ window.PhoneBook = {
           </tr>`
   },
 
+  updateAgenda: function (id, firstName) {
+
+    let firstNameValue = $('#firstName').val();
+    const requestBody = {
+      firstName: firstNameValue,
+    };
+
+    $.ajax({
+      url: PhoneBook.API_URL +'?id'+ id,
+      method: 'PUT',
+      contentType: 'application/json',
+      data: JSON.stringify(requestBody)
+    }).done(function () {
+      PhoneBook.getAgenda();
+    });
+
+  },
+
+  deleteAgenda: function (id) {
+
+    $.ajax({
+      url: PhoneBook.API_URL + '?id=' + id,
+      method: 'DELETE'
+    }).done(function () {
+      PhoneBook.getAgenda();
+    });
+  },
+
   bindEvents: function () {
     $('.add-form').submit(function (event) {
       event.preventDefault();
       PhoneBook.createAgenda();
     });
-  }
+
+    $('.add-form tbody').delegate('.edit-contact', 'click', function(event) {
+      event.preventDefault();
+      let id = $(this).data('id');
+
+      // cum sa sterg datele din field First Name si sa permit inserare de text?
+      let name = 'MARIA'
+      PhoneBook.updateAgenda(id, name);
+    });
+
+    $('.add-form tbody').delegate ('.remove-contact', 'click', function (event) {
+      event.preventDefault();
+      let id = $(this).data('id');
+      PhoneBook.deleteAgenda(id);
+    })
+
+  },
 
 };
 
