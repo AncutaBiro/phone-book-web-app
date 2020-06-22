@@ -41,7 +41,7 @@ header h1 {
 
 #navigation-menu {
   overflow: hidden;
-  background-color:  #55aade;
+  background-color: orangered;
 }
 
 #navigation-menu a {
@@ -58,7 +58,7 @@ header h1 {
   color: black;
 }
 
-#navigation-menu div {
+#navigation-menu{
   padding: 0;
   margin: 0;
   text-align: center;

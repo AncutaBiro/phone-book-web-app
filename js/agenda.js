@@ -3,10 +3,10 @@ window.PhoneBook = {
   API_URL: 'http://localhost:8081/agenda',
 
   createAgenda: function () {
-    let firstNameValue = $('#firstName').val();
-    let lastNameValue = $('#lastName').val();
-    let phoneNumberValue = $('#phoneNumber').val();
-    let emailValue = $('#email').val();
+    let firstNameValue = $('#firstName-field').val();
+    let lastNameValue = $('#lastName-field').val();
+    let phoneNumberValue = $('#phoneNumber-field').val();
+    let emailValue = $('#email-field').val();
 
     var requestBody = {
       firstName: firstNameValue,
@@ -59,9 +59,10 @@ window.PhoneBook = {
           </tr>`
   },
 
+  // cum sa sterg datele din field First Name si sa permit inserare de text si apoi salvarea?
+  // in API, editarea/update pe contact se face dupa parametrii: id + firstName
   updateAgenda: function (id, firstName) {
-
-    let firstNameValue = $('#firstName').val();
+    let firstNameValue = $('#firstName-field').val();
     const requestBody = {
       firstName: firstNameValue,
     };
@@ -93,12 +94,11 @@ window.PhoneBook = {
       PhoneBook.createAgenda();
     });
 
+
     $('.add-form tbody').delegate('.edit-contact', 'click', function(event) {
       event.preventDefault();
       let id = $(this).data('id');
-
-      // cum sa sterg datele din field First Name si sa permit inserare de text?
-      let name = 'MARIA'
+      let name = $(this).data ('MARIA');
       PhoneBook.updateAgenda(id, name);
     });
 

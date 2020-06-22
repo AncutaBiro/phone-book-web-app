@@ -22,12 +22,8 @@
     </div>
   </header>
 
-<!--  nu stiu de ce nu apare navigation menu in pagina???-->
   <!-- de ce nu raman incarcate datele in pagina web, la fiecare refresh dispar si apar dupa 1 sec???-->
-  <!-- buton de cancel functioneaza in sensul ca se sterge orice informatie din field, insa apare o eroare in consola de genu
- Uncaught TypeError: PhoneBook.cancelEdit is not a function
-    at HTMLButtonElement.onclick (index.html?_ijt=k8padvp3senf05eta44oqmt5d5:104)-->
-
+  <!--  nu stiu de ce nu apare navigation menu in pagina???-->
   <div id="navigation-menu">
       <a href="https://github.com/AncutaBiro" title="about me" target="_blank">About</a>
       <a href="#" title="welcome home">HOME</a>
@@ -99,13 +95,16 @@
           </tbody>
           <tfoot>
           <tr>
-            <td><input type="text" required name="firstName" placeholder="Enter first name"></td>
-            <td><input type="text" name="lastName" placeholder="Enter last name"></td>
-            <td><input type="text" required name="phoneNumber" placeholder="Enter phone number"></td>
-            <td><input type="text" required name="email" placeholder="Enter email address"></td>
+            <td><input type="text" id = "firstName-field" required name="firstName" placeholder="Enter first name"></td>
+            <td><input type="text" id= "lastName-field" required name="lastName" placeholder="Enter last name"></td>
+            <td><input type="text" id = "phoneNumber-field" required name="phoneNumber" placeholder="Enter phone number"></td>
+            <td><input type="text" id = "email-field" required name="email" placeholder="Enter email address"></td>
             <td>
-              <button type="submit" value="Save" title="Save">&#128190;</button>
-              <button type="reset" onclick="PhoneBook.cancelEdit()" title="Cancel">&#10006;</button>
+              <button type="submit" id="save-button" value="Save" title="Save">&#128190;</button>
+              <!-- buton de cancel functioneaza in sensul ca se sterge orice informatie din field, insa apare o eroare in consola de genu
+ Uncaught TypeError: PhoneBook.cancelEdit is not a function
+    at HTMLButtonElement.onclick (index.html?_ijt=k8padvp3senf05eta44oqmt5d5:104)-->
+              <button type="reset" id="cancel-button" onclick="PhoneBook.cancelEdit()" title="Cancel">&#10006;</button>
             </td>
           </tr>
           </tfoot>
