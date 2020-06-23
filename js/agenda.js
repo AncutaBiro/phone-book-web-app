@@ -1,3 +1,4 @@
+
 window.PhoneBook = {
 
   API_URL: 'http://localhost:8081/agenda',
@@ -61,10 +62,33 @@ window.PhoneBook = {
 
   // cum sa sterg datele din field First Name si sa permit inserare de text si apoi salvarea?
   // in API, editarea/update pe contact se face dupa parametrii: id + firstName
-  updateAgenda: function (id, firstName) {
+
+  startEdit: function (id) {
+    // let agenda = [];
+    var editAgenda = this.getAgendaRowHtml.find(function (agenda) {
+      console.log(agenda.firstName);
+      return agenda.id === id;
+    });
+    console.debug('startEdit', editAgenda);
+
+    $('#firstName-field').val(editAgenda.firstName);
+    $('#lastName-field').val(editAgenda.lastName);
+    $('#phoneNumber-field').val(editAgenda.phoneNumber);
+    $('#email-field').val(editAgenda.email);
+    editId = id;
+  },
+
+  updateAgenda: function (id, agenda) {
     let firstNameValue = $('#firstName-field').val();
-    const requestBody = {
+    let lastNameValue = $('#lastName-field').val();
+    let phoneNumberValue = $('#phoneNumber-field').val();
+    let emailValue = $('#email-field').val();
+
+    var requestBody = {
       firstName: firstNameValue,
+      lastName: lastNameValue,
+      phoneNumber: phoneNumberValue,
+      email: emailValue,
     };
 
     $.ajax({
@@ -88,6 +112,12 @@ window.PhoneBook = {
     });
   },
 
+  cancelEdit: function() {
+    editId = '';
+    document.querySelector(".add-form").reset();
+  },
+
+
   bindEvents: function () {
     $('.add-form').submit(function (event) {
       event.preventDefault();
@@ -98,8 +128,7 @@ window.PhoneBook = {
     $('.add-form tbody').delegate('.edit-contact', 'click', function(event) {
       event.preventDefault();
       let id = $(this).data('id');
-      let name = $(this).data ('MARIA');
-      PhoneBook.updateAgenda(id, name);
+      PhoneBook.startEdit(id);
     });
 
     $('.add-form tbody').delegate ('.remove-contact', 'click', function (event) {
