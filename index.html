@@ -16,89 +16,48 @@
   <header>
     <div>
       <a id="logo" href="." title="PhoneBook">
-        <img src="https://www.freevector.com/uploads/vector/preview/4653/FreeVector-Phonebook.jpg" alt="Phone Book" width="100" height="80">
+        <img src="https://www.freevector.com/uploads/vector/preview/4653/FreeVector-Phonebook.jpg" alt="Phone Book"
+             width="100" height="80">
       </a>
       <h1>PHONE BOOK APPLICATION</h1>
     </div>
   </header>
 
-  <!-- de ce nu raman incarcate datele in pagina web, la fiecare refresh dispar si apar dupa 1 sec???-->
-  <!--  nu stiu de ce nu apare navigation menu in pagina???-->
-  <div id="navigation-menu">
-      <a href="https://github.com/AncutaBiro" title="about me" target="_blank">About</a>
-      <a href="#" title="welcome home">HOME</a>
-  </div>
-
   <div id="content-wrapper">
+
+    <div id="navigation-menu" class="x-borders">
+      <a href="https://github.com/AncutaBiro" id ='about-menu' target="_blank">About</a>
+      <a href="." id='home-menu' >Home</a>
+    </div>
+
     <div id="content">
       <form class="add-form" action="" onsubmit="return false" method="post">
 
-        <div style="padding-bottom: 5px">
-          <input type="text" id="search" placeholder="Search">
-          <label for="search">&#128270;</label>
-        </div>
+<!--        <div style="padding-bottom: 5px">-->
+<!--          <input type="text" id="search" placeholder="Search">-->
+<!--          <label for="search">&#128270;</label>-->
+<!--        </div>-->
         <table id="phone-book">
           <thead>
           <tr>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Phone </th>
+            <th>Phone</th>
             <th>Email</th>
             <th>Actions</th>
           </tr>
           </thead>
 
           <tbody>
-<!--          <tr>-->
-<!--            <td>Ancuta</td>-->
-<!--            <td>Biro</td>-->
-<!--            <td>07000000000</td>-->
-<!--            <td>ancuta.biro@yahoo.com</td>-->
-<!--            <td>-->
-<!--              <a href="#" class="edit-contact" data-id=1 >-->
-<!--                <i class="fa fa-pencil-square" aria-hidden="true" ></i>-->
-<!--              </a>-->
-<!--              <a href="#" class="remove-contact" data-id=1>-->
-<!--                <i class="fa fa-trash"></i>-->
-<!--              </a>-->
-<!--            </td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <td>Ancuta</td>-->
-<!--            <td>Biro</td>-->
-<!--            <td>07000000000</td>-->
-<!--            <td>ancuta.biro@yahoo.com</td>-->
-<!--            <td>-->
-<!--              <a href="#" class="edit-contact" data-id=2>-->
-<!--                <i class="fa fa-pencil-square" aria-hidden="true" ></i>-->
-<!--              </a>-->
-<!--              <a href="#" class="remove-contact" data-id=2>-->
-<!--                <i class="fa fa-trash"></i>-->
-<!--              </a>-->
-<!--            </td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <td>Ancuta</td>-->
-<!--            <td>Biro</td>-->
-<!--            <td>07000000000</td>-->
-<!--            <td>ancuta.biro@yahoo.com</td>-->
-<!--            <td>-->
-<!--              <a href="#" class="edit-contact" data-id=3>-->
-<!--                <i class="fa fa-pencil-square" aria-hidden="true"></i>-->
-<!--              </a>-->
-<!--              <a href="#" class="remove-contact" data-id=3>-->
-<!--                <i class="fa fa-trash"></i>-->
-<!--              </a>-->
-<!--            </td>-->
-<!--          </tr>-->
 
           </tbody>
           <tfoot>
           <tr>
-            <td><input type="text" id = "firstName-field" required name="firstName" placeholder="Enter first name"></td>
-            <td><input type="text" id= "lastName-field" required name="lastName" placeholder="Enter last name"></td>
-            <td><input type="text" id = "phoneNumber-field" required name="phoneNumber" placeholder="Enter phone number"></td>
-            <td><input type="text" id = "email-field" required name="email" placeholder="Enter email address"></td>
+            <td><input type="text" id="firstName-field" required name="firstName" placeholder="Enter first name"></td>
+            <td><input type="text" id="lastName-field" required name="lastName" placeholder="Enter last name"></td>
+            <td><input type="text" id="phoneNumber-field" required name="phoneNumber" placeholder="Enter phone number">
+            </td>
+            <td><input type="text" id="email-field" required name="email" placeholder="Enter email address"></td>
             <td>
               <button type="submit" id="save-button" value="Save" title="Save">&#128190;</button>
               <button type="reset" id="cancel-button" onclick="PhoneBook.cancelEdit()" title="Cancel">&#10006;</button>

@@ -39,38 +39,39 @@ header h1 {
   margin-right: 10px;
 }
 
-#navigation-menu {
-  overflow: hidden;
-  background-color: orangered;
-}
-
 #navigation-menu a {
   float: right;
   display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
+  color: white;
+  text-align: left;
+  padding: 10px 15px;
   text-decoration: none;
+  font-family: Helvetica, sans-serif;
+  text-emphasis-color: white;
+  margin-top:-2px;
 }
 
 #navigation-menu a:hover {
-  background-color: #f2f2f2;
-  color: black;
+  background-color: #00B7FF;
+  color:black;
 }
 
-#navigation-menu{
-  padding: 0;
-  margin: 0;
-  text-align: center;
-  background-color: #00aeef;
-  border-bottom: 1px solid #00aeef;
-  height: 40px;
+#navigation-menu {
+  width: 150%;
+  padding: 10px;
+  /*text-align: -moz-center;*/
+  background-color: #72879e;
+  border-bottom: 2px solid #55aade;
+  height: 30px;
   font-weight: bold;
+  float: right;
 }
+
 
 #content-wrapper {
   padding: 10px 10px 10px 10px;
   margin-bottom: 35px;
+  font-family: Helvetica, sans-serif;
 }
 
 .clear {
@@ -90,9 +91,11 @@ footer {
 }
 
 #content {
+  margin-top: 50px;
   padding-left: 220px;
   float: left;
   width: 70%;
+  font-family: Helvetica, sans-serif;
 }
 
 #search {
@@ -118,9 +121,10 @@ th {
 .add-form a {
   text-decoration: none;
 }
-.add-form a:hover {
-  text-decoration: underline;
+.add-form tr:hover {
+  background-color: #ddd;
 }
+
 .add-form td input {
   width: 100%;
   padding: 4px;

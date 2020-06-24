@@ -1,4 +1,3 @@
-
 window.PhoneBook = {
 
   API_URL: 'http://localhost:8081/agenda',
@@ -50,35 +49,21 @@ window.PhoneBook = {
             <td>${agenda.phoneNumber}</td>
             <td>${agenda.email}</td>
             <td>
-              <a href="#" class="edit-contact" data-id=${agenda.id}>
+              <a href="#" class="edit-contact" title="Edit" data-id=${agenda.id}>
                 <i class="fa fa-pencil-square" aria-hidden="true"></i>
               </a>
-              <a href="#" class="remove-contact" data-id=${agenda.id}>
+              <a href="#" class="remove-contact" title="Delete" data-id=${agenda.id}>
                 <i class="fa fa-trash"></i>
               </a>
             </td>
           </tr>`
   },
 
-  // cum sa sterg datele din field First Name si sa permit inserare de text si apoi salvarea?
-  // in API, editarea/update pe contact se face dupa parametrii: id + firstName
+// <!-- de ce nu raman incarcate datele in pagina web, la fiecare refresh dispar si apar dupa 1 sec???-->
+  // te rog sa ma ajuti: cum sa incarc contactul in fieldul de create, sa il editez si apoi salvez???
+  // in API metoda update cerea id si request-ul, oare mai trebuie adaugat inca un parametru?
 
-  startEdit: function (id) {
-    // let agenda = [];
-    var editAgenda = this.getAgendaRowHtml.find(function (agenda) {
-      console.log(agenda.firstName);
-      return agenda.id === id;
-    });
-    console.debug('startEdit', editAgenda);
-
-    $('#firstName-field').val(editAgenda.firstName);
-    $('#lastName-field').val(editAgenda.lastName);
-    $('#phoneNumber-field').val(editAgenda.phoneNumber);
-    $('#email-field').val(editAgenda.email);
-    editId = id;
-  },
-
-  updateAgenda: function (id, agenda) {
+  updateAgenda: function (id) {
     let firstNameValue = $('#firstName-field').val();
     let lastNameValue = $('#lastName-field').val();
     let phoneNumberValue = $('#phoneNumber-field').val();
@@ -92,7 +77,7 @@ window.PhoneBook = {
     };
 
     $.ajax({
-      url: PhoneBook.API_URL +'?id'+ id,
+      url: PhoneBook.API_URL + '?id' + id,
       method: 'PUT',
       contentType: 'application/json',
       data: JSON.stringify(requestBody)
@@ -103,7 +88,6 @@ window.PhoneBook = {
   },
 
   deleteAgenda: function (id) {
-
     $.ajax({
       url: PhoneBook.API_URL + '?id=' + id,
       method: 'DELETE'
@@ -112,7 +96,7 @@ window.PhoneBook = {
     });
   },
 
-  cancelEdit: function() {
+  cancelEdit: function () {
     editId = '';
     document.querySelector(".add-form").reset();
   },
@@ -125,13 +109,13 @@ window.PhoneBook = {
     });
 
 
-    $('.add-form tbody').delegate('.edit-contact', 'click', function(event) {
+    $('.add-form tbody').delegate('.edit-contact', 'click', function (event) {
       event.preventDefault();
       let id = $(this).data('id');
-      PhoneBook.startEdit(id);
+      PhoneBook.updateAgenda(id);
     });
 
-    $('.add-form tbody').delegate ('.remove-contact', 'click', function (event) {
+    $('.add-form tbody').delegate('.remove-contact', 'click', function (event) {
       event.preventDefault();
       let id = $(this).data('id');
       PhoneBook.deleteAgenda(id);
