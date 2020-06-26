@@ -44,6 +44,7 @@
             <th>Last Name</th>
             <th>Phone</th>
             <th>Email</th>
+            <th>Favourite</th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -55,9 +56,9 @@
           <tr>
             <td><input type="text" id="firstName-field" required name="firstName" placeholder="Enter first name"></td>
             <td><input type="text" id="lastName-field" required name="lastName" placeholder="Enter last name"></td>
-            <td><input type="text" id="phoneNumber-field" required name="phoneNumber" placeholder="Enter phone number">
-            </td>
+            <td><input type="text" id="phoneNumber-field" required name="phoneNumber" placeholder="Enter phone number"></td>
             <td><input type="text" id="email-field" required name="email" placeholder="Enter email address"></td>
+            <td><input type="checkbox" id="mark-done" required name="favourite" data-id=1></td>
             <td>
               <button type="submit" id="save-button" value="Save" title="Save">&#128190;</button>
               <button type="reset" id="cancel-button" onclick="PhoneBook.cancelEdit()" title="Cancel">&#10006;</button>
