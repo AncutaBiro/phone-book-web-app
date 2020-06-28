@@ -29,11 +29,11 @@ window.PhoneBook = {
 
   updateAgenda: function (id, favourite) {
     const requestBody = {
-      true : favourite
+      favourite: favourite
     };
 
     $.ajax({
-      url: PhoneBook.API_URL + '?id' + id,
+      url: PhoneBook.API_URL + '?id=' + id,
       method: 'PUT',
       contentType: 'application/json',
       data: JSON.stringify(requestBody)
@@ -71,7 +71,7 @@ window.PhoneBook = {
 
   getAgendaRowHtml: function (agenda) {
 
-    let checkedAttribute = agenda.done? 'checked': '';
+    let checkedAttribute = agenda.favourite? 'checked' : '';
 
     return `<tr>
             <td>${agenda.firstName}</td>
@@ -93,14 +93,11 @@ window.PhoneBook = {
   },
 
 // <!-- de ce nu raman incarcate datele in pagina web, la fiecare refresh dispar si apar dupa 1 sec???-->
-  // te rog sa ma ajuti: cum sa incarc contactul in fieldul de create, sa il editez si apoi salvez???
-  // in API metoda update cerea id si request-ul, oare mai trebuie adaugat inca un parametru?
 
   cancelEdit: function () {
     editId = '';
     document.querySelector(".add-form").reset();
   },
-
 
   bindEvents: function () {
     $('.add-form').submit(function (event) {
@@ -112,7 +109,7 @@ window.PhoneBook = {
     $('.add-form tbody').delegate('.mark-done', 'change', function (event) {
       event.preventDefault();
       let id = $(this).data('id');
-      let checked = $(this).is (':checked');
+      let checked = $(this).is(':checked');
       PhoneBook.updateAgenda(id, checked);
     });
 

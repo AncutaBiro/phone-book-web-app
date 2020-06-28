@@ -84,7 +84,7 @@ window.PhoneBook = {
     // };
 
     $.ajax({
-      url: PhoneBook.API_URL + '?id' + id,
+      url: PhoneBook.API_URL + '?id=' + id,
       method: 'PUT',
       contentType: 'application/json',
       data: agenda,
