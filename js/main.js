@@ -58,14 +58,14 @@ window.PhoneBook = {
         contentType: 'application/json',
         data: JSON.stringify(agenda),
       }).done(function (response) {
-      if (response.success) {
+
         PhoneBook.cancelEdit();
         PhoneBook.getAgenda();
-      }
+
     });
   },
 
-  updateAgenda: function (id, agenda) {
+  updateAgenda: function (editId, agenda) {
     let firstNameValue = $('#firstName-field').val();
     let lastNameValue = $('#lastName-field').val();
     let phoneNumberValue = $('#phoneNumber-field').val();
@@ -80,18 +80,19 @@ window.PhoneBook = {
       favourite: favourite,
     };
 
-    console.log (id);
+    // console.log (id);
     $.ajax({
-      url: PhoneBook.API_URL + '?id=' + id,
+      url: PhoneBook.API_URL + '?id=' + editId,
       method: 'PUT',
       contentType: 'application/json',
       data: JSON.stringify(requestBody),
     }).done(function (response) {
-      if (response.success) {
+
         PhoneBook.cancelEdit();
-        console.log (id);
-        PhoneBook.updateAgenda(agenda);
-      }
+        // console.log (id);
+        // PhoneBook.updateAgenda(editId, agenda);
+        PhoneBook.getAgenda()
+
     });
   },
 
@@ -100,35 +101,13 @@ window.PhoneBook = {
       url: PhoneBook.API_URL + '?id=' + id,
       method: 'DELETE',
     }).done(function (response) {
-      if (response.success) {
         // PhoneBookLocalActions.delete(id);
         PhoneBook.getAgenda();
-      }
+
     });
   },
 
   bindEvents: function () {
-
-    $('.add-form').submit(function (event) {
-      event.preventDefault();
-      const agenda = {
-        firstName: $('#firstName-field').val(),
-        lastName: $('#lastName-field').val(),
-        phoneNumber: $('#phoneNumber-field').val(),
-        email: $('#email-field').val(),
-        // favourite: $('#favourite-field').val(),
-      };
-
-      if (editId) {
-        agenda.id = editId;
-        let id = $(this).data('id');
-        console.log(id)
-        PhoneBook.updateAgenda(id, agenda);
-      } else {
-        PhoneBook.createAgenda(agenda);
-      }
-    });
-
 
     $('.add-form tbody').delegate('a.edit', 'click', function (event) {
       event.preventDefault();
@@ -142,6 +121,25 @@ window.PhoneBook = {
       PhoneBook.deleteAgenda(id);
     });
 
+    $('.add-form').submit(function (event) {
+      event.preventDefault();
+      const agenda = {
+        firstName: $('#firstName-field').val(),
+        lastName: $('#lastName-field').val(),
+        phoneNumber: $('#phoneNumber-field').val(),
+        email: $('#email-field').val(),
+        // favourite: $('#favourite-field').val(),
+      };
+
+      if (editId) {
+        agenda.id = editId;
+        // let id = $(this).data('id');
+        // console.log(editId)
+        PhoneBook.updateAgenda(editId, agenda);
+      } else {
+        PhoneBook.createAgenda(agenda);
+      }
+    });
   },
 
   startEdit: function (id) {
@@ -149,13 +147,14 @@ window.PhoneBook = {
     var editContact = contacts.find(function(agenda) {
       return agenda.id == id;
     });
-    console.log('startEdit', id);
+    // console.log('startEdit', id);
 
     $('input[name=firstName]').val(editContact.firstName);
     $('input[name=lastName]').val(editContact.lastName);
     $('input[name=phoneNumber]').val(editContact.phoneNumber);
     $('input[name=email]').val(editContact.email);
     editId = id;
+    console.log('startEdit', editId)
   },
 
   cancelEdit: function () {
