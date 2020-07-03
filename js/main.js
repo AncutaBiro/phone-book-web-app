@@ -65,29 +65,32 @@ window.PhoneBook = {
     });
   },
 
-  updateAgenda: function (agenda) {
-    // let firstNameValue = $('#firstName-field').val();
-    // let lastNameValue = $('#lastName-field').val();
-    // let phoneNumberValue = $('#phoneNumber-field').val();
-    // let emailValue = $('#email-field').val();
-    //
-    // var requestBody = {
-    //   firstName: firstNameValue,
-    //   lastName: lastNameValue,
-    //   phoneNumber: phoneNumberValue,
-    //   email: emailValue,
-    // };
+  updateAgenda: function (id, agenda) {
+    let firstNameValue = $('#firstName-field').val();
+    let lastNameValue = $('#lastName-field').val();
+    let phoneNumberValue = $('#phoneNumber-field').val();
+    let emailValue = $('#email-field').val();
+    let favourite = $('#favourite').val();
 
+    var requestBody = {
+      firstName: firstNameValue,
+      lastName: lastNameValue,
+      phoneNumber: phoneNumberValue,
+      email: emailValue,
+      favourite: favourite,
+    };
+
+    console.log (id);
     $.ajax({
-      url: PhoneBook.API_URL,
+      url: PhoneBook.API_URL + '?id=' + id,
       method: 'PUT',
       contentType: 'application/json',
-      data: JSON.stringify(agenda),
+      data: JSON.stringify(requestBody),
     }).done(function (response) {
       if (response.success) {
         PhoneBook.cancelEdit();
-        PhoneBookLocalActions.update(agenda);
-        // PhoneBook.updateAgenda(id, agenda);
+        console.log (id);
+        PhoneBook.updateAgenda(agenda);
       }
     });
   },
@@ -113,11 +116,14 @@ window.PhoneBook = {
         lastName: $('#lastName-field').val(),
         phoneNumber: $('#phoneNumber-field').val(),
         email: $('#email-field').val(),
+        // favourite: $('#favourite-field').val(),
       };
 
       if (editId) {
         agenda.id = editId;
-        PhoneBook.updateAgenda(agenda);
+        let id = $(this).data('id');
+        console.log(id)
+        PhoneBook.updateAgenda(id, agenda);
       } else {
         PhoneBook.createAgenda(agenda);
       }
@@ -143,7 +149,7 @@ window.PhoneBook = {
     var editContact = contacts.find(function(agenda) {
       return agenda.id == id;
     });
-    // console.debug('startEdit', editContact);
+    console.log('startEdit', id);
 
     $('input[name=firstName]').val(editContact.firstName);
     $('input[name=lastName]').val(editContact.lastName);
@@ -181,6 +187,7 @@ window.PhoneBookLocalActions = {
     agendaToUpdate.lastName = agenda.lastName;
     agendaToUpdate.phoneNumber = agenda.phoneNumber;
     agendaToUpdate.email = agenda.email;
+    agendaToUpdate.favourite = agenda.favourite;
     PhoneBook.displayAgenda(contacts);
   },
 
