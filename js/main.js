@@ -27,6 +27,7 @@ window.PhoneBook = {
       url: PhoneBook.API_URL,
       method: 'GET',
     }).done(function (contacts) {
+      PhoneBookLocalActions.load(contacts);
       PhoneBook.displayAgenda(contacts);
     });
   },
@@ -60,7 +61,6 @@ window.PhoneBook = {
       if (response.success) {
         PhoneBook.cancelEdit();
         PhoneBook.getAgenda();
-        // PhoneBookLocalActions.add(agenda);
       }
     });
   },
@@ -98,8 +98,8 @@ window.PhoneBook = {
       method: 'DELETE',
     }).done(function (response) {
       if (response.success) {
-        PhoneBook.getAgenda();
         // PhoneBookLocalActions.delete(id);
+        PhoneBook.getAgenda();
       }
     });
   },
@@ -140,11 +140,10 @@ window.PhoneBook = {
 
   startEdit: function (id) {
 
-    var editContact = contacts.find(function (agenda) {
-      console.log(agenda.firstName);
+    var editContact = contacts.find(function(agenda) {
       return agenda.id == id;
     });
-    console.debug('startEdit', editContact);
+    // console.debug('startEdit', editContact);
 
     $('input[name=firstName]').val(editContact.firstName);
     $('input[name=lastName]').val(editContact.lastName);
@@ -158,24 +157,23 @@ window.PhoneBook = {
     document.querySelector(".add-form").reset();
   },
 
-
 };
 
 window.PhoneBookLocalActions = {
   load: (contacts) => {
-    // save in persons as global variable
-    window.contacts = contacts;
+    window.contacts = JSON.parse(contacts);
   },
-  add: agenda => {
-    agenda.id = new Date().getTime();
-    contacts.push(agenda);
-    PhoneBook.displayAgenda(contacts);
-  },
-  delete: id => {
-    var remainingContacts = contacts.filter(agenda => agenda.id !== id);
-    window.contacts = remainingContacts;
-    PhoneBook.displayAgenda(remainingContacts);
-  },
+  // add: agenda => {
+  //   agenda.id = new Date().getTime();
+  //   contacts.push(agenda);
+  //   PhoneBook.displayAgenda(contacts);
+  // },
+  // delete: id => {
+  //   var remainingContacts = JSON.parse(contacts).filter(agenda => agenda.id !== id);
+  //   window.contacts = remainingContacts;
+  //   PhoneBook.displayAgenda(remainingContacts);
+  // },
+
   update: agenda => {
     const id = agenda.id;
     var agendaToUpdate = contacts.find(agenda => agenda.id === id);
