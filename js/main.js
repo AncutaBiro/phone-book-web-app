@@ -12,10 +12,10 @@ window.PhoneBook = {
             <td>${agenda.phoneNumber}</td>
             <td>${agenda.email}</td>
             <td>
-              <a href="#" class="edit-contact" title="Edit" data-id=${agenda.id}>
+              <a href="#" class="edit" title="Edit" data-id=${agenda.id}>
                 <i class="fa fa-pencil-square" aria-hidden="true"></i>
               </a>
-              <a href="#" class="remove-contact" title="Delete" data-id=${agenda.id}>
+              <a href="#" class="delete" title="Delete" data-id=${agenda.id}>
                 <i class="fa fa-trash"></i>
               </a>
             </td>
@@ -27,14 +27,13 @@ window.PhoneBook = {
       url: PhoneBook.API_URL,
       method: 'GET',
     }).done(function (contacts) {
-      PhoneBookLocalActions.load(contacts);
-      PhoneBook.displayAgenda(JSON.parse(contacts));
+      PhoneBook.displayAgenda(contacts);
     });
   },
 
   displayAgenda: function (contacts) {
     let rowsHtml = '';
-    contacts.forEach(agenda => rowsHtml += PhoneBook.getAgendaRowHtml(agenda));
+    JSON.parse(contacts).forEach(agenda => rowsHtml += PhoneBook.getAgendaRowHtml(agenda));
     $('.add-form tbody').html(rowsHtml);
   },
 
@@ -56,19 +55,15 @@ window.PhoneBook = {
         url: PhoneBook.API_URL,
         method: 'POST',
         contentType: 'application/json',
-        data: agenda,
-        // JSON.stringify(requestBody)
+        data: JSON.stringify(agenda),
       }).done(function (response) {
       if (response.success) {
         PhoneBook.cancelEdit();
-        PhoneBookLocalActions.createAgenda(agenda);
+        PhoneBook.getAgenda();
+        // PhoneBookLocalActions.add(agenda);
       }
     });
   },
-
-// <!-- de ce nu raman incarcate datele in pagina web, la fiecare refresh dispar si apar dupa 1 sec???-->
-  // te rog sa ma ajuti: cum sa incarc contactul in fieldul de create, sa il editez si apoi salvez???
-  // in API metoda update cerea id si request-ul, oare mai trebuie adaugat inca un parametru?
 
   updateAgenda: function (agenda) {
     // let firstNameValue = $('#firstName-field').val();
@@ -84,15 +79,15 @@ window.PhoneBook = {
     // };
 
     $.ajax({
-      url: PhoneBook.API_URL + '?id=' + id,
+      url: PhoneBook.API_URL,
       method: 'PUT',
       contentType: 'application/json',
-      data: agenda,
-      // JSON.stringify(requestBody)
+      data: JSON.stringify(agenda),
     }).done(function (response) {
       if (response.success) {
         PhoneBook.cancelEdit();
         PhoneBookLocalActions.update(agenda);
+        // PhoneBook.updateAgenda(id, agenda);
       }
     });
   },
@@ -103,8 +98,8 @@ window.PhoneBook = {
       method: 'DELETE',
     }).done(function (response) {
       if (response.success) {
-        // PhoneBook.getAgenda();
-        PhoneBookLocalActions.delete(id);
+        PhoneBook.getAgenda();
+        // PhoneBookLocalActions.delete(id);
       }
     });
   },
@@ -126,17 +121,16 @@ window.PhoneBook = {
       } else {
         PhoneBook.createAgenda(agenda);
       }
-      $('.add-form').trigger('reset');
     });
 
 
-    $('.add-form tbody').delegate('.edit-contact', 'click', function (event) {
+    $('.add-form tbody').delegate('a.edit', 'click', function (event) {
       event.preventDefault();
       let id = $(this).data('id');
       PhoneBook.startEdit(id);
     });
 
-    $('.add-form tbody').delegate('.remove-contact', 'click', function (event) {
+    $('.add-form tbody').delegate('a.delete', 'click', function (event) {
       event.preventDefault();
       let id = $(this).data('id');
       PhoneBook.deleteAgenda(id);
@@ -145,7 +139,8 @@ window.PhoneBook = {
   },
 
   startEdit: function (id) {
-    var editContact = contacts.find(function(agenda) {
+
+    var editContact = contacts.find(function (agenda) {
       console.log(agenda.firstName);
       return agenda.id == id;
     });
@@ -163,6 +158,7 @@ window.PhoneBook = {
     document.querySelector(".add-form").reset();
   },
 
+
 };
 
 window.PhoneBookLocalActions = {
@@ -170,7 +166,6 @@ window.PhoneBookLocalActions = {
     // save in persons as global variable
     window.contacts = contacts;
   },
-  // ES6 functions (one param - no need pharanteses for arguments)
   add: agenda => {
     agenda.id = new Date().getTime();
     contacts.push(agenda);
@@ -189,7 +184,7 @@ window.PhoneBookLocalActions = {
     agendaToUpdate.phoneNumber = agenda.phoneNumber;
     agendaToUpdate.email = agenda.email;
     PhoneBook.displayAgenda(contacts);
-  }
+  },
 
 };
 

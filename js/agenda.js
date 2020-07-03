@@ -92,8 +92,6 @@ window.PhoneBook = {
           </tr>`
   },
 
-// <!-- de ce nu raman incarcate datele in pagina web, la fiecare refresh dispar si apar dupa 1 sec???-->
-
   cancelEdit: function () {
     editId = '';
     document.querySelector(".add-form").reset();
