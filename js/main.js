@@ -6,11 +6,17 @@ window.PhoneBook = {
   API_URL: 'http://localhost:8081/agenda',
 
   getAgendaRowHtml: function (agenda) {
+
+    let checkedAttribute = agenda.favourite? 'checked' : '';
+
     return `<tr>
             <td>${agenda.firstName}</td>
             <td>${agenda.lastName}</td>
             <td>${agenda.phoneNumber}</td>
             <td>${agenda.email}</td>
+            <td>
+             <input type="checkbox" class="mark-done" data-id=${agenda.id} ${checkedAttribute}>
+            </td>
             <td>
               <a href="#" class="edit" title="Edit" data-id=${agenda.id}>
                 <i class="fa fa-pencil-square" aria-hidden="true"></i>
@@ -38,27 +44,28 @@ window.PhoneBook = {
     $('.add-form tbody').html(rowsHtml);
   },
 
-  createAgenda: function (agenda) {
-    // let firstNameValue = $('#firstName-field').val();
-    // let lastNameValue = $('#lastName-field').val();
-    // let phoneNumberValue = $('#phoneNumber-field').val();
-    // let emailValue = $('#email-field').val();
-    //
-    // var requestBody = {
-    //   firstName: firstNameValue,
-    //   lastName: lastNameValue,
-    //   phoneNumber: phoneNumberValue,
-    //   email: emailValue,
-    // };
+  createAgenda: function () {
+
+    let firstNameValue = $('#firstName-field').val();
+    let lastNameValue = $('#lastName-field').val();
+    let phoneNumberValue = $('#phoneNumber-field').val();
+    let emailValue = $('#email-field').val();
+    let favouriteValue = $('input[name=favourite]').val();
+
+    var requestBody = {
+      firstName: firstNameValue,
+      lastName: lastNameValue,
+      phoneNumber: phoneNumberValue,
+      email: emailValue,
+      favourite: favouriteValue,};
 
     $.ajax(
       {
         url: PhoneBook.API_URL,
         method: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify(agenda),
-      }).done(function (response) {
-
+        data: JSON.stringify(requestBody),
+      }).done(function () {
         PhoneBook.cancelEdit();
         PhoneBook.getAgenda();
 
@@ -70,7 +77,7 @@ window.PhoneBook = {
     let lastNameValue = $('#lastName-field').val();
     let phoneNumberValue = $('#phoneNumber-field').val();
     let emailValue = $('#email-field').val();
-    let favourite = $('#favourite').val();
+    let favourite = $('input[name=favourite]').val();
 
     var requestBody = {
       firstName: firstNameValue,
@@ -80,17 +87,13 @@ window.PhoneBook = {
       favourite: favourite,
     };
 
-    // console.log (id);
     $.ajax({
       url: PhoneBook.API_URL + '?id=' + editId,
       method: 'PUT',
       contentType: 'application/json',
       data: JSON.stringify(requestBody),
-    }).done(function (response) {
-
+    }).done(function () {
         PhoneBook.cancelEdit();
-        // console.log (id);
-        // PhoneBook.updateAgenda(editId, agenda);
         PhoneBook.getAgenda()
 
     });
@@ -100,8 +103,7 @@ window.PhoneBook = {
     $.ajax({
       url: PhoneBook.API_URL + '?id=' + id,
       method: 'DELETE',
-    }).done(function (response) {
-        // PhoneBookLocalActions.delete(id);
+    }).done(function () {
         PhoneBook.getAgenda();
 
     });
@@ -123,18 +125,17 @@ window.PhoneBook = {
 
     $('.add-form').submit(function (event) {
       event.preventDefault();
+
       const agenda = {
         firstName: $('#firstName-field').val(),
         lastName: $('#lastName-field').val(),
         phoneNumber: $('#phoneNumber-field').val(),
         email: $('#email-field').val(),
-        // favourite: $('#favourite-field').val(),
+        checked : $(this).is(':checked'),
       };
 
       if (editId) {
         agenda.id = editId;
-        // let id = $(this).data('id');
-        // console.log(editId)
         PhoneBook.updateAgenda(editId, agenda);
       } else {
         PhoneBook.createAgenda(agenda);
@@ -147,12 +148,12 @@ window.PhoneBook = {
     var editContact = contacts.find(function(agenda) {
       return agenda.id == id;
     });
-    // console.log('startEdit', id);
 
     $('input[name=firstName]').val(editContact.firstName);
     $('input[name=lastName]').val(editContact.lastName);
     $('input[name=phoneNumber]').val(editContact.phoneNumber);
     $('input[name=email]').val(editContact.email);
+    $('input[name=favourite]').val(editContact.favourite);
     editId = id;
     console.log('startEdit', editId)
   },
