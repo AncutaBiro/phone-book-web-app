@@ -50,7 +50,7 @@ window.PhoneBook = {
     let lastNameValue = $('#lastName-field').val();
     let phoneNumberValue = $('#phoneNumber-field').val();
     let emailValue = $('#email-field').val();
-    let favouriteValue = $('input[name=favourite]').val();
+    let favouriteValue = $('#mark-done').val();
 
     var requestBody = {
       firstName: firstNameValue,
@@ -77,7 +77,7 @@ window.PhoneBook = {
     let lastNameValue = $('#lastName-field').val();
     let phoneNumberValue = $('#phoneNumber-field').val();
     let emailValue = $('#email-field').val();
-    let favourite = $('input[name=favourite]').val();
+    let favourite = $('#mark-done').val();
 
     var requestBody = {
       firstName: firstNameValue,
@@ -169,16 +169,6 @@ window.PhoneBookLocalActions = {
   load: (contacts) => {
     window.contacts = JSON.parse(contacts);
   },
-  // add: agenda => {
-  //   agenda.id = new Date().getTime();
-  //   contacts.push(agenda);
-  //   PhoneBook.displayAgenda(contacts);
-  // },
-  // delete: id => {
-  //   var remainingContacts = JSON.parse(contacts).filter(agenda => agenda.id !== id);
-  //   window.contacts = remainingContacts;
-  //   PhoneBook.displayAgenda(remainingContacts);
-  // },
 
   update: agenda => {
     const id = agenda.id;
